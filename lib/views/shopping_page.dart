@@ -6,6 +6,8 @@ import 'package:dart_example/views/add_to_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dart_example/views/tab_bar.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:dart_example/controllers/notificationsController.dart';
 
 class ShoppingPage extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
   final cartController = Get.put(CartController());
 
   final priceController = Get.put(PriceController());
-
+  final notificationsController = Get.put(NotificationsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +101,8 @@ class _ShoppingPageState extends State<ShoppingPage> {
                                         onPressed: () {
                                           cartController.addToCart(
                                               controller.products[index]);
+                                          notificationsController
+                                              .sendNotification();
                                         },
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -134,26 +138,33 @@ class _ShoppingPageState extends State<ShoppingPage> {
           showDialog(
               context: context,
               builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: Colors.black,
-                  content: Stack(
-                    overflow: Overflow.visible,
-                    children: <Widget>[
-                      AdToCard(),
-                      Positioned(
-                        right: -40.0,
-                        top: -40.0,
-                        child: InkResponse(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: CircleAvatar(
-                            child: Icon(Icons.close),
-                            backgroundColor: Colors.red,
+                var height = MediaQuery.of(context).size.height;
+                var width = MediaQuery.of(context).size.width;
+
+                return Container(
+                  height: height - 10,
+                  width: width - 10,
+                  child: AlertDialog(
+                    backgroundColor: Colors.black,
+                    content: Stack(
+                      overflow: Overflow.visible,
+                      children: <Widget>[
+                        AdToCard(),
+                        Positioned(
+                          right: -40.0,
+                          top: -40.0,
+                          child: InkResponse(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: CircleAvatar(
+                              child: Icon(Icons.close),
+                              backgroundColor: Colors.red,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               });

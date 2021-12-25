@@ -29,17 +29,7 @@ class _MyTabBarState extends State<MyTabBar>
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.add_shopping_cart,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                // do something
-              },
-            )
-          ],
+          actions: <Widget>[],
           // leading: Icon(
           //   Icons.add_shopping_cart_rounded,
           //   color: Colors.white,

@@ -28,7 +28,7 @@ dependencies:
   get: ^4.6.1
   convex_bottom_bar: ^3.0.0
   o_color_picker: ^1.0.2
-
+  awesome_notifications: any
 
 
 
